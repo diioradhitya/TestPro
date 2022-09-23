@@ -12,9 +12,6 @@ jobs:
     - name: Downloading Ngrok.
       run: |
         Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-        Invoke-WebRequest https://raw.githubusercontent.com/johntechofficial/JohnTechFreeRDP/main/start.bat -OutFile start.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/johntechofficial/JohnTechFreeRDP/main/wallpaper.jpg -OutFile wallpaper.jpg
-        Invoke-WebRequest https://raw.githubusercontent.com/johntechofficial/JohnTechFreeRDP/main/wallpaper.bat -OutFile wallpaper.bat
     - name: Extracting Ngrok Files.
       run: Expand-Archive ngrok.zip
     - name: Connecting to your Ngrok account.
@@ -26,8 +23,6 @@ jobs:
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-        copy wallpaper.jpg D:\a\wallpaper.jpg
-        copy wallpaper.bat D:\a\wallpaper.bat
     - name: Creating Tunnel.
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     - name: Connecting to your RDP.
